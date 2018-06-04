@@ -12,7 +12,7 @@ public class App {
 
     public void logEvent(Event event, String str) {
 
-        String message = str.replaceAll(client.getId(), client.getFullname());
+        String message = str.replaceAll(client.getId(), client.getFullName());
         event.setMsg(message);
         el.logEvent(event);
 

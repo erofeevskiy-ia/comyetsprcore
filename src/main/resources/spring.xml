@@ -3,6 +3,8 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+    <import resource="loggers.xml"/>
+
     <bean id="app" class="app.App">
         <property name="client" ref="client"/>
         <property name="el" ref="cacheFileEventLogger"/>
@@ -13,8 +15,6 @@
         <constructor-arg value="Tom"/>
     </bean>
 
-    <bean id="eventLogger" class="app.ConsoleEventLogger"/>
-
     <bean id="event" class="app.Event" scope="prototype">
         <constructor-arg>
             <bean class="java.util.Date"/>
@@ -24,12 +24,5 @@
 
     <bean name="df" class="java.text.DateFormat" factory-method="getDateTimeInstance"/>
 
-    <bean name="fileEventLogger" class="app.FileEventLogger">
-        <!--<constructor-arg name="filename" value="111.txt"/>-->
-        <property name="filename" value="111.txt"/>
-    </bean>
 
-    <bean id="cacheFileEventLogger" class="app.CacheFileEvenLogger" parent="fileEventLogger" destroy-method="destroy">
-        <property name="cacheSize" value="5"/>
-    </bean>
 </beans>
