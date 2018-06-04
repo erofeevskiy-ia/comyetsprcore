@@ -1,39 +1,46 @@
 package app;
 
+import app.enums.EventType;
 import interfaces.EventLogger;
-import lombok.Setter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-@Setter
+import java.util.Map;
+
+@Data
+@AllArgsConstructor
 public class App {
     private Client client;
-    private EventLogger el;
+    private EventLogger defaultLogger;
+    private Map<EventType, EventLogger> eventLoggerMap;
 
-    public void logEvent(Event event, String str) {
+    private void logEvent(Event event, String str, EventType eventType) {
 
+        EventLogger logger = eventLoggerMap.get(eventType);
+        if (logger == null)
+            logger = defaultLogger;
+        logger.logEvent(event);
         String message = str.replaceAll(client.getId(), client.getFullName());
         event.setMsg(message);
-        el.logEvent(event);
+        defaultLogger.logEvent(event);
 
     }
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) {
         ConfigurableApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring.xml");
         App app = applicationContext.getBean(App.class);
         int count = 0;
         applicationContext.registerShutdownHook();
-        while (true) {
-            Event event = applicationContext.getBean(Event.class);
-            count++;
-            Thread.currentThread().sleep(200);
-            app.logEvent(event, "Bla bla 2:");
-            System.out.println(event.toString());
-            if (count >= 7) {
-                //throw new RuntimeException("kjdsgh");
-                System.exit(1);
-                //applicationContext.close();
-            }
-        }
+        Event event = applicationContext.getBean(Event.class);
+        app.logEvent(event, "I'am 1", EventType.ERROR);
+
+        Event event1 = applicationContext.getBean(Event.class);
+        app.logEvent(event1, "I'am 2", EventType.INFO);
+
+        Event event2 = applicationContext.getBean(Event.class);
+        app.logEvent(event2, "I'am 3", null);
     }
 }
+

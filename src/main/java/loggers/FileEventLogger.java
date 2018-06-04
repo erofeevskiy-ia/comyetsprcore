@@ -1,5 +1,6 @@
-package app;
+package loggers;
 
+import app.Event;
 import interfaces.EventLogger;
 import lombok.Data;
 import utills.FileUtils;

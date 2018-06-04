@@ -1,5 +1,6 @@
-package app;
+package loggers;
 
+import app.Event;
 import interfaces.EventLogger;
 
 public class ConsoleEventLogger implements EventLogger {

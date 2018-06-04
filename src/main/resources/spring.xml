@@ -6,13 +6,20 @@
     <import resource="loggers.xml"/>
 
     <bean id="app" class="app.App">
-        <property name="client" ref="client"/>
-        <property name="el" ref="cacheFileEventLogger"/>
+        <constructor-arg ref="client"/>
+        <constructor-arg ref="cacheFileEventLogger"/>
+        <constructor-arg>
+            <map>
+                <entry key="INFO" value-ref="consoleEventLogger"/>
+                <entry key="ERROR" value-ref="combinedEventLogger"/>
+            </map>
+        </constructor-arg>
     </bean>
 
     <bean id="client" class="app.Client">
         <constructor-arg value="2"/>
         <constructor-arg value="Tom"/>
+        <property name="greetings" value="Hello!"/>
     </bean>
 
     <bean id="event" class="app.Event" scope="prototype">

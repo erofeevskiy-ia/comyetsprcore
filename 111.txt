@@ -1,0 +1,5 @@
+Event{id=0, msg='null', data=Jun 5, 2018 1:03:28 AM}
+Event{id=0, msg='I'am 1', data=Jun 5, 2018 1:03:28 AM}Destroy
+Event{id=1, msg='I'am Tom', data=Jun 5, 2018 1:03:28 AM}Destroy
+Event{id=2, msg='I'am 3', data=Jun 5, 2018 1:03:28 AM}Destroy
+Event{id=2, msg='I'am 3', data=Jun 5, 2018 1:03:28 AM}Destroy
