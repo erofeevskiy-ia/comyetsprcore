@@ -24,9 +24,9 @@
     <context:component-scan base-package="app"/>
     <context:component-scan base-package="loggers"/>
 
-    <util:map id="eventLoggerMap">
-        <entry key="#{T(app.enums.EventType).INFO}" value-ref="consoleEventLogger"/>
-        <entry key="#{T(app.enums.EventType).ERROR}" value-ref="combinedEventLogger"/>
+    <util:map id="eventLoggerMap" key-type="app.enums.EventType">
+        <entry key="INFO" value-ref="consoleEventLogger"/>
+        <entry key="ERROR" value-ref="combinedEventLogger"/>
     </util:map>
 
     <bean id="client" class="app.Client"
