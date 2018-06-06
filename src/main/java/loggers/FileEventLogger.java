@@ -4,6 +4,7 @@ import app.Event;
 import interfaces.EventLogger;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 import utills.FileUtils;
 
@@ -12,8 +13,12 @@ import java.io.File;
 
 @Data
 @Component(value = "fileEventLogger")
+@PropertySource(value = {"classpath:app.properties"},
+        ignoreResourceNotFound = true)
 public class FileEventLogger implements EventLogger {
-    @Value("${fileName}")
+
+    //@Value("${fileName}")
+    @Value("111.txt")
     private String filename;
     private File file;
 
@@ -26,6 +31,6 @@ public class FileEventLogger implements EventLogger {
 
     @Override
     public void logEvent(Event event) {
-        FileUtils.writeStringToFile(event.toString(),filename);
+        FileUtils.writeStringToFile(event.toString(), filename);
     }
 }
