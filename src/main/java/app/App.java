@@ -21,18 +21,18 @@ public class App {
         EventLogger logger = eventLoggerMap.get(eventType);
         if (logger == null)
             logger = defaultLogger;
-        logger.logEvent(event);
         String message = str.replaceAll(client.getId(), client.getFullName());
-        event.setMsg(message);
-        defaultLogger.logEvent(event);
+        event.setMsg(client.getGreeting()+message);
+        logger.logEvent(event);
 
     }
 
     public static void main(String[] args) {
         ConfigurableApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring.xml");
         App app = applicationContext.getBean(App.class);
-        int count = 0;
+
         applicationContext.registerShutdownHook();
+
         Event event = applicationContext.getBean(Event.class);
         app.logEvent(event, "I'am 1", EventType.ERROR);
 

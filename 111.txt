@@ -1,5 +1,2 @@
-Event{id=0, msg='null', data=Jun 5, 2018 1:03:28 AM}
-Event{id=0, msg='I'am 1', data=Jun 5, 2018 1:03:28 AM}Destroy
-Event{id=1, msg='I'am Tom', data=Jun 5, 2018 1:03:28 AM}Destroy
-Event{id=2, msg='I'am 3', data=Jun 5, 2018 1:03:28 AM}Destroy
-Event{id=2, msg='I'am 3', data=Jun 5, 2018 1:03:28 AM}Destroy
+Event{id=0, msg='Hello! I'am John', data=Jun 6, 2018 1:20:22 PM}
+Event{id=2, msg='Hello! I'am 3', data=Jun 6, 2018 1:20:22 PM}Destroy
