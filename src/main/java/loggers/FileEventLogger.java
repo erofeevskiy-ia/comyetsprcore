@@ -3,20 +3,21 @@ package loggers;
 import app.Event;
 import interfaces.EventLogger;
 import lombok.Data;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 import utills.FileUtils;
 
+import javax.annotation.PostConstruct;
 import java.io.File;
 
 @Data
+@Component(value = "fileEventLogger")
 public class FileEventLogger implements EventLogger {
+    @Value("${fileName}")
     private String filename;
     private File file;
 
-    //public FileEventLogger() {}
-//    public FileEventLogger(String filename) {
-//        this.filename = filename;
-//    }
-
+    @PostConstruct
     void init() {
         this.file = new File(filename);
         if (!file.canWrite())

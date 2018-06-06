@@ -1,12 +1,17 @@
 package app;
 
 import lombok.Data;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @Data
+@Component
+@Scope(scopeName = "prototype")
 public class Event {
     private static AtomicInteger AUTO_ID = new AtomicInteger(0);
     private int id;
@@ -14,6 +19,7 @@ public class Event {
     private java.util.Date data;
     private DateFormat df;
 
+    @Autowired
     public Event(Date data, DateFormat df) {
         id = AUTO_ID.getAndIncrement();
         this.data = data;

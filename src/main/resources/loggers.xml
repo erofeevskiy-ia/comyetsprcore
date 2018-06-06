@@ -1,25 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="consoleEventLogger" class="loggers.ConsoleEventLogger"/>
+       xmlns:util="http://www.springframework.org/schema/util"
 
-    <bean name="fileEventLogger" class="loggers.FileEventLogger">
-        <!--<constructor-arg name="filename" value="111.txt"/>-->
-        <property name="filename" value="111.txt"/>
-    </bean>
+       xsi:schemaLocation="
 
-    <bean id="cacheFileEventLogger" class="loggers.CacheFileEvenLogger" parent="fileEventLogger" destroy-method="destroy">
-        <property name="cacheSize" value="5"/>
-    </bean>
+       http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
 
-    <bean id="combinedEventLogger" class="loggers.CombinedEventLogger">
-        <property name="loggers">
-            <list>
-                <ref bean="consoleEventLogger"/>
-                <ref bean="fileEventLogger"/>
-            </list>
-        </property>
-    </bean>
+       http://www.springframework.org/schema/util
+       http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <util:list id="loggers">
+        <ref bean="consoleEventLogger"/>
+        <ref bean="fileEventLogger"/>
+    </util:list>
 </beans>

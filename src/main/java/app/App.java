@@ -4,17 +4,29 @@ import app.enums.EventType;
 import interfaces.EventLogger;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import java.util.Map;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
+@Component
 public class App {
+    @Autowired
     private Client client;
+
+    @Autowired
+    @Qualifier(value = "cacheFileEventLogger")
     private EventLogger defaultLogger;
+
+    @Resource
     private Map<EventType, EventLogger> eventLoggerMap;
 
     private void logEvent(Event event, String str, EventType eventType) {
@@ -42,6 +54,7 @@ public class App {
 
         Event event2 = applicationContext.getBean(Event.class);
         app.logEvent(event2, "I'am 3", null);
+
     }
 }
 

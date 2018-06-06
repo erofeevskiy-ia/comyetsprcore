@@ -2,13 +2,21 @@ package loggers;
 
 import app.Event;
 import lombok.Data;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.DependsOn;
+import org.springframework.stereotype.Component;
 import utills.FileUtils;
 
+import javax.annotation.PreDestroy;
 import java.util.ArrayList;
 import java.util.List;
 
 @Data
+@Component(value = "cacheFileEventLogger")
+@DependsOn(value = "fileEventLogger")
 public class CacheFileEvenLogger extends FileEventLogger {
+
+    @Value(value = "${cacheSize}")
     private int cacheSize;
     private List<Event> cache;
 
@@ -26,6 +34,7 @@ public class CacheFileEvenLogger extends FileEventLogger {
         }
     }
 
+    @PreDestroy
     void destroy(){
 //        if(!cache.isEmpty())
             writeEventsFromCache("Destroy");
