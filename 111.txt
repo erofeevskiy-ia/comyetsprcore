@@ -7,3 +7,5 @@ Event{id=2, msg='Hello! I'am 3', data=Jun 7, 2018 12:29:59 AM}Destroy
 Event{id=0, msg='Hello! I'am John', data=Jun 7, 2018 12:31:38 AM}
 Event{id=0, msg='Hello! I'am John', data=Jun 7, 2018 12:31:38 AM}Destroy
 Event{id=2, msg='Hello! I'am 3', data=Jun 7, 2018 12:31:38 AM}Destroy
+Event{id=0, msg='Hello! I'am John', data=Jun 7, 2018 12:41:03 AM}
+Event{id=2, msg='Hello! I'am 3', data=Jun 7, 2018 12:41:03 AM}Destroy
