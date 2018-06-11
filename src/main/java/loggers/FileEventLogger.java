@@ -13,12 +13,9 @@ import java.io.File;
 
 @Data
 @Component(value = "fileEventLogger")
-@PropertySource(value = {"classpath:app.properties"},
-        ignoreResourceNotFound = true)
 public class FileEventLogger implements EventLogger {
 
-    //@Value("${fileName}")
-    @Value("111.txt")
+    @Value("${fileName}")
     private String filename;
     private File file;
 

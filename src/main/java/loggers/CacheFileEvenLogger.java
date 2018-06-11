@@ -16,8 +16,7 @@ import java.util.List;
 @DependsOn(value = "fileEventLogger")
 public class CacheFileEvenLogger extends FileEventLogger {
 
-    //    @Value(value = "${cacheSize}")
-    @Value(value = "5")
+    @Value(value = "${cacheSize}")
     private int cacheSize;
     private List<Event> cache;
 
