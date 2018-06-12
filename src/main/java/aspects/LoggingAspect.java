@@ -2,10 +2,7 @@ package aspects;
 
 
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.AfterReturning;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.annotation.*;
 import org.springframework.stereotype.Component;
 
 @Aspect
@@ -25,19 +22,19 @@ public class LoggingAspect {
         System.out.println("BEFORE: " + joinPoint.getTarget().getClass().getSimpleName() + " "
                 + joinPoint.getSignature().getName());
     }
-
-    @AfterReturning(
-            pointcut = "allLogEventMethods()",
-            returning = "retVal")
-    public void logAfter(Object retVal) {
-        System.out.println("Returning value: " + retVal);
-    }
-
-    @AfterReturning(
-            pointcut = "allLogEventMethods()",
-            returning = "thr")
-    public void logAfterThrow(Throwable thr) {
-        System.err.println("Thrown : " + thr);
-    }
+//
+//    @AfterReturning(
+//            pointcut = "allLogEventMethods()",
+//            returning = "retVal")
+//    public void logAfter(Object retVal) {
+//        System.out.println("Returning value: " + retVal);
+//    }
+//
+//    @AfterThrowing(
+//            pointcut = "allLogEventMethods()",
+//            throwing = "thr")
+//    public void logAfterThrow(Throwable thr) {
+//        System.err.println("Thrown : " + thr);
+//    }
 
 }

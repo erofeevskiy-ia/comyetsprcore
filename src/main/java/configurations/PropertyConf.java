@@ -1,11 +1,11 @@
 package configurations;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
-import org.springframework.stereotype.Component;
 
-@Component
+@Configuration
 @PropertySource(value = {"classpath:client.properties", "classpath:app.properties"},
         ignoreResourceNotFound = true)
 public class PropertyConf {
