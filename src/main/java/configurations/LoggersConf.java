@@ -5,7 +5,6 @@ import loggers.CombinedEventLogger;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -13,8 +12,6 @@ import java.util.List;
 
 @Configuration
 @ComponentScan(basePackages = "loggers")
-@PropertySource(value = {"classpath:app.properties"},
-        ignoreResourceNotFound = true)
 public class LoggersConf {
 
     @Resource(name = "consoleEventLogger")

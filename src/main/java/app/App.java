@@ -6,25 +6,17 @@ import interfaces.EventLogger;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.stereotype.Component;
 
 import java.util.Map;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Component
 public class App {
-    @Autowired
+
     private Client client;
-
-    @Autowired
-    @Qualifier(value = "cacheFileEventLogger")
     private EventLogger defaultLogger;
-
     private Map<EventType, EventLogger> eventLoggerMap;
 
     private void logEvent(Event event, String str, EventType eventType) {

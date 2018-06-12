@@ -1,13 +1,14 @@
 package configurations;
 
 import app.App;
+import app.Client;
 import app.enums.EventType;
 import interfaces.EventLogger;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
-import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
+import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Required;
+import org.springframework.context.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.HashMap;
@@ -15,7 +16,8 @@ import java.util.Map;
 
 @Configuration
 @ComponentScan({"app", "loggers"})
-@Import({LoggersConf.class, ClientConf.class, UtilConf.class})
+@Import({PropertyConf.class, LoggersConf.class, ClientConf.class, UtilConf.class})
+@EnableAspectJAutoProxy
 public class AppConf {
 
     @Resource(name = "consoleEventLogger")
@@ -24,6 +26,12 @@ public class AppConf {
     @Resource(name = "combinedEventLogger")
     private EventLogger combinedEventLogger;
 
+    @Autowired
+    @Qualifier(value = "cacheFileEventLogger")
+    private EventLogger defaultLogger;
+
+    @Autowired
+    private Client client;
 
     @Bean
     public App app() {
@@ -33,15 +41,13 @@ public class AppConf {
         eventLoggerMap.put(EventType.INFO, consoleEventLogger);
         eventLoggerMap.put(EventType.ERROR, combinedEventLogger);
 
+
         App app = new App();
+        app.setDefaultLogger(defaultLogger);
+        app.setClient(client);
         app.setEventLoggerMap(eventLoggerMap);
 
         return app;
-    }
-
-    @Bean
-    public static PropertySourcesPlaceholderConfigurer propertyConfigInDev() {
-        return new PropertySourcesPlaceholderConfigurer();
     }
 }
 
