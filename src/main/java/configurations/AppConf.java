@@ -3,6 +3,7 @@ package configurations;
 import app.App;
 import app.Client;
 import app.enums.EventType;
+import aspects.LoggingAspect;
 import interfaces.EventLogger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -15,7 +16,7 @@ import java.util.Map;
 @Configuration
 @ComponentScan({"app", "loggers", "aspects"})
 @Import({PropertyConf.class, LoggersConf.class, ClientConf.class, UtilConf.class})
-@EnableAspectJAutoProxy
+@EnableAspectJAutoProxy()
 public class AppConf {
 
     @Resource(name = "consoleEventLogger")
